@@ -18,14 +18,14 @@ pathh="$(cat /etc/v2ray/path.txt)"
 #Ubah Config bawaan
 cd /etc/v2ray && rm config.json && wget https://raw.githubusercontent.com/natxanss/v2ray/main/config.json
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/data.json
-cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/domain.json
+cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/domain.txt
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/user.txt
 
 #Ubah Domain
 var='"Host"'
 ler='"'
 
-sed -i "s/dom/$domain/" /etc/v2ray/domain.json
+sed -i "s/dom/$domain/" /etc/v2ray/domain.txt
 sed -i "s/$var.*/$var: $ler$domain$ler/" /etc/v2ray/config.json
 
 #Download Command
