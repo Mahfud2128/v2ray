@@ -15,7 +15,7 @@ uuids='"$uuid"'
 ler='"'
 aids='0'
 path="$(grep -oP '(?<="path": ")[^"]*' /etc/v2ray/config.json)"
-domain="$(grep -oP '(?<="domain": ")[^"]*' /etc/v2ray/data.json)"
+domain="$(grep -oP '(?<="domain": ")[^"]*' /etc/v2ray/domain.json)"
 #sed -i '15s/.*//' /etc/v2ray/config.json
 sed -i '24d' /etc/v2ray/config.json
 sed -i "s/$client.*/$clients: [\n\t  {\n\t #$user/" /etc/v2ray/config.json
@@ -23,6 +23,7 @@ sed -i "s/#$user/#$user\n\t  $aid:   $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\
 sed -i "s/user/$user/" /etc/v2ray/data.json
 sed -i "s/uuid/$uuid/" /etc/v2ray/data.json
 sed -i "s+pathh+$path+" /etc/v2ray/data.json
+sed -i "s/domain/$domain/" /etc/v2ray/data.json
 hasil=$(base64 /etc/v2ray/data.json | tr -d "\n")
 MYIP=$(wget -qO- ipv4.icanhazip.com)
 expp=$(date -d "$exp days" +"%d-%m-%Y")
@@ -47,10 +48,13 @@ echo -e "[>>]Expired: $expp"
 echo -e "||============================||"
 echo -e "  Thank For Using Our Service"
 echo -e "||============================||"
-echo -e "\nLink vmess://$hasil"
+echo -e "          Link Vmess"
+echo -e "||============================||"
+echo -e "vmess://$hasil"
 
 #Pengulangan data.json
 sed -i "s/$user/user/" /etc/v2ray/data.json
 sed -i "s/$uuid/uuid/" /etc/v2ray/data.json
 sed -i "s+$path+pathh+" /etc/v2ray/data.json
+sed -i "s/$domain/domain/" /etc/v2ray/data.json
 service v2ray restart
