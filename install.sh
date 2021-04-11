@@ -13,9 +13,14 @@ apt-get install uuid
 #Make installation for v2ray
 #Thanks to Jhrory
 source <(curl -sL https://multi.netlify.app/v2ray.sh)
+path="$(grep -oP '(?<="path": ")[^"]*' /etc/v2ray/config.json)"
+printf "$path" >> /etc/v2ray/path.txt
+pathh="$(cat /etc/v2ray/path.txt)"
 
 #Ubah Config bawaan
 cd /etc/v2ray/config.json && rm config.json && wget https://raw.githubusercontent.com/natxanss/v2ray/main/config.json
+sed -i "s+/sKZTAU4y/+$pathh+ /etc/v2ray/config.json
+rm /etc/v2ray/path.txt
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/data.json
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/domain.json
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/user.txt
