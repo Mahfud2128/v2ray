@@ -16,7 +16,7 @@ ler='"'
 aids='0'
 path="$(grep -oP '(?<="path": ")[^"]*' /etc/v2ray/config.json)"
 domain="$(grep -oP '(?<="domain": ")[^"]*' /etc/v2ray/domain.json)"
-#sed -i '15s/.*//' /etc/v2ray/config.json
+
 sed -i '24d' /etc/v2ray/config.json
 sed -i "s/$client.*/$clients: [\n\t  {\n\t #$user/" /etc/v2ray/config.json
 sed -i "s/#$user/#$user\n\t  $aid:   $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #$user\n\t  {/" /etc/v2ray/config.json
@@ -24,9 +24,11 @@ sed -i "s/user/$user/" /etc/v2ray/data.json
 sed -i "s/uuid/$uuid/" /etc/v2ray/data.json
 sed -i "s+pathh+$path+" /etc/v2ray/data.json
 sed -i "s/domain/$domain/" /etc/v2ray/data.json
+
 hasil=$(base64 /etc/v2ray/data.json | tr -d "\n")
 MYIP=$(wget -qO- ipv4.icanhazip.com)
 expp=$(date -d "$exp days" +"%d-%m-%Y")
+
 echo -e "Processing..."
 sleep 0.2
 clear
@@ -57,4 +59,8 @@ sed -i "s/$user/user/" /etc/v2ray/data.json
 sed -i "s/$uuid/uuid/" /etc/v2ray/data.json
 sed -i "s+$path+pathh+" /etc/v2ray/data.json
 sed -i "s/$domain/domain/" /etc/v2ray/data.json
+
+#Penambahan user v2ray
+sed -i "s/#Username.*/#Username #Expired\n$user $expp/" /etc/v2ray/user.txt
+
 service v2ray restart
