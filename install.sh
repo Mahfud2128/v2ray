@@ -30,7 +30,7 @@ var='"Host"'
 ler='"'
 
 sed -i "s/dom/$domain/" /etc/v2ray/domain.json
-sed -i "s/$var/$var: $ler$domain$ler/" /etc/v2ray/config.json
+sed -i "s/$var.*/$var: $ler$domain$ler/" /etc/v2ray/config.json
 
 #Download Command
 wget -O /usr/bin/addv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/addv2ray.sh"
