@@ -15,7 +15,7 @@ uuids='"$uuid"'
 ler='"'
 aids='0'
 path="$(grep -oP '(?<="path": ")[^"]*' /etc/v2ray/config.json)"
-domain="$(grep -oP '(?<="domain": ")[^"]' /etc/v2ray/data.json)"
+domain="$(grep -oP '(?<="domain": ")[^"]*' /etc/v2ray/data.json)"
 #sed -i '15s/.*//' /etc/v2ray/config.json
 sed -i '24d' /etc/v2ray/config.json
 sed -i "s/$client.*/$clients: [\n\t  {\n\t #$user/" /etc/v2ray/config.json
