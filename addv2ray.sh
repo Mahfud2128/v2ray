@@ -15,10 +15,11 @@ uuids='"$uuid"'
 ler='"'
 aids='0'
 path="$(grep -oP '(?<="path": ")[^"]*' /etc/v2ray/config.json)"
+domain="$(grep -oP '(?<="domain": ")[^"]' /etc/v2ray/data.json)"
 #sed -i '15s/.*//' /etc/v2ray/config.json
-sed -i '35d' /etc/v2ray/config.json
+sed -i '24d' /etc/v2ray/config.json
 sed -i "s/$client.*/$clients: [\n\t  {\n\t #$user/" /etc/v2ray/config.json
-sed -i "s/#$user/#$user\n\t  $id: $ler$uuid$ler,\n\t  $aid: $aids\n\t  },\n\t #$user\n\t  {/" /etc/v2ray/config.json
+sed -i "s/#$user/#$user\n\t  $aid:   $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #$user\n\t  {/" /etc/v2ray/config.json
 sed -i "s/user/$user/" /etc/v2ray/data.json
 sed -i "s/uuid/$uuid/" /etc/v2ray/data.json
 sed -i "s+pathh+$path+" /etc/v2ray/data.json
@@ -33,7 +34,7 @@ echo -e "||============================||"
 echo -e "    Xans Tech Configuration"
 echo -e "||============================||"
 echo -e "[>>]Username: $user"
-echo -e "[>>]Domain: linode.srv1-xans.team"
+echo -e "[>>]Domain: $domain"
 echo -e "[>>]IP: $MYIP"
 echo -e "[>>]Port: 80"
 echo -e "[>>]UUID: $uuid"
@@ -46,7 +47,7 @@ echo -e "[>>]Expired: $expp"
 echo -e "||============================||"
 echo -e "  Thank For Using Our Service"
 echo -e "||============================||"
-echo -e "Link vmess://$hasil"
+echo -e "\nLink vmess://$hasil"
 
 #Pengulangan data.json
 sed -i "s/$user/user/" /etc/v2ray/data.json
