@@ -36,5 +36,4 @@ sed -i "s/$var/$var: $ler$domain$ler/" /etc/v2ray/config.json
 wget -O /usr/bin/addv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/addv2ray.sh"
 wget -O /usr/bin/listv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/listv2ray.sh"
 
-rm /usr/bin/v2ray
 systemctl restart v2ray
