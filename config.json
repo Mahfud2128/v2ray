@@ -1,0 +1,77 @@
+{
+  "log": {
+    "error": "/var/log/v2ray/error.log",
+    "access": "/var/log/v2ray/access.log",
+    "loglevel": "info"
+  },
+  "routing": {
+    "rules": [
+      {
+        "ip": [
+          "0.0.0.0/8",
+          "10.0.0.0/8",
+          "100.64.0.0/10",
+          "169.254.0.0/16",
+          "172.16.0.0/12",
+          "192.0.0.0/24",
+          "192.0.2.0/24",
+          "192.168.0.0/16",
+          "198.18.0.0/15",
+          "198.51.100.0/24",
+          "203.0.113.0/24",
+          "::1/128",
+          "fc00::/7",
+          "fe80::/10"
+        ],
+        "outboundTag": "blocked",
+        "type": "field"
+      }
+    ]
+  },
+  "outbounds": [
+    {
+      "settings": {},
+      "protocol": "freedom"
+    },
+    {
+      "settings": {},
+      "protocol": "blackhole",
+      "tag": "blocked"
+    }
+  ],
+  "inbounds": [
+    {
+      "settings": {
+        "clients": [
+          {
+            "id": "605d4f74-9aa6-11eb-9ba2-f23c924e8f06",
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "httpSettings": {},
+        "tcpSettings": {},
+        "wsSettings": {},
+        "quicSettings": {},
+        "tlsSettings": {},
+        "security": "none",
+        "kcpSettings": {
+          "writeBufferSize": 2,
+          "downlinkCapacity": 100,
+          "mtu": 1350,
+          "tti": 50,
+          "uplinkCapacity": 100,
+          "header": {
+            "type": "srtp"
+          },
+          "congestion": false,
+          "readBufferSize": 2
+        },
+        "network": "kcp"
+      },
+      "protocol": "vmess",
+      "port": 42132
+    }
+  ]
+}
