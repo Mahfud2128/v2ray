@@ -21,6 +21,7 @@
       "port": 80,
       "settings": {
         "clients": [
+         #default
           {
             "alterId": 0,
             "id": "15651ab4-9aac-11eb-a45c-f23c924e8f06"
