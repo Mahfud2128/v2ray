@@ -18,7 +18,7 @@ printf "$path" >> /etc/v2ray/path.txt
 pathh="$(cat /etc/v2ray/path.txt)"
 
 #Ubah Config bawaan
-cd /etc/v2ray/config.json && rm config.json && wget https://raw.githubusercontent.com/natxanss/v2ray/main/config.json
+cd /etc/v2ray && rm config.json && wget https://raw.githubusercontent.com/natxanss/v2ray/main/config.json
 sed -i "s+/sKZTAU4y/+$pathh+ /etc/v2ray/config.json
 rm /etc/v2ray/path.txt
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/data.json
