@@ -15,7 +15,8 @@ uuids='"$uuid"'
 ler='"'
 aids='0'
 path="$(grep -oP '(?<="path": ")[^"]*' /etc/v2ray/config.json)"
-domain="$(grep -oP '(?<="domain": ")[^"]*' /etc/v2ray/domain.json)"
+#domain="$(grep -oP '(?<="domain": ")[^"]*' /etc/v2ray/domain.json)"
+domain="$(cat /etc/v2ray/domain.txt)"
 
 sed -i '25d' /etc/v2ray/config.json
 sed -i "s/#default.*/#default\n\t #$user\n\t  {\n\t    $aid:    $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #$user\n\t  {/" /etc/v2ray/config.json
