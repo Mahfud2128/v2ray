@@ -18,16 +18,17 @@ path="$(grep -oP '(?<="path": ")[^"]*' /etc/v2ray/config.json)"
 #domain="$(grep -oP '(?<="domain": ")[^"]*' /etc/v2ray/domain.json)"
 domain="$(cat /etc/v2ray/domain.txt)"
 
-sed -i '25d' /etc/v2ray/config.json
-sed -i "s/#default.*/#default\n\t #$user\n\t  {\n\t    $aid:    $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #$user\n\t  {/" /etc/v2ray/config.json
+MYIP=$(wget -qO- ipv4.icanhazip.com)
+expp=$(date -d "$exp days" +"%d-%m-%Y")
+
+#sed -i '25d' /etc/v2ray/config.json
+sed -i "s/#default.*/#default\n\t #$user $expp\n\t  {$aid: $aids, $id: $ler$uuid$ler},\n\t #$user $expp/" /etc/v2ray/config.json
 sed -i "s/user/$user/" /etc/v2ray/data.json
 sed -i "s/uuid/$uuid/" /etc/v2ray/data.json
 sed -i "s+pathh+$path+" /etc/v2ray/data.json
 sed -i "s/domain/$domain/" /etc/v2ray/data.json
 
 hasil=$(base64 /etc/v2ray/data.json | tr -d "\n")
-MYIP=$(wget -qO- ipv4.icanhazip.com)
-expp=$(date -d "$exp days" +"%d-%m-%Y")
 
 echo -e "Processing..."
 sleep 0.2
@@ -48,10 +49,11 @@ echo -e "[>>]Path: $path"
 echo -e "[>>]Host: None"
 echo -e "[>>]Expired: $expp"
 echo -e "||============================||"
-echo -e "  Thank For Using Our Service"
+echo -e "  Thanks For Using Our Service"
 echo -e "||============================||"
-echo -e "          Link Vmess"
+echo -e "           Link Vmess"
 echo -e "||============================||"
+echo -e “”
 echo -e "vmess://$hasil"
 
 #Pengulangan data.json
@@ -61,6 +63,6 @@ sed -i "s+$path+pathh+" /etc/v2ray/data.json
 sed -i "s/$domain/domain/" /etc/v2ray/data.json
 
 #Penambahan user v2ray
-sed -i "s/#Username.*/#Username #Expired\n$user $expp/" /etc/v2ray/user.txt
+sed -i "s/#Username/#$user $expp\n#Username/" /etc/v2ray/user.txt
 
-service v2ray restart
+systemctl disable v2ray && systemctl enable v2ray && systemctl start v2ray
