@@ -34,4 +34,13 @@ wget -O /usr/bin/listv2ray "https://raw.githubusercontent.com/natxanss/v2ray/mai
 wget -O /usr/bin/exp "https://raw.githubusercontent.com/natxanss/v2ray/main/exp.sh"
 wget -O /usr/bin/menu "https://raw.githubusercontent.com/natxanss/v2ray/main/menu.sh"
 
+#Membuat Command bisa digunakan
+chmod +x /usr/bin/addv2ray
+chmod +x /usr/bin/listv2ray
+chmod +x /usr/bin/exp
+chmod +x /usr/bin/menu
+
+#Membuat script berjalan di cronjob
+echo “59 23 * * * /usr/bin/exp” >> /etc/crontab
+
 systemctl restart v2ray
