@@ -34,6 +34,8 @@ wget -O /usr/bin/listv2ray "https://raw.githubusercontent.com/natxanss/v2ray/mai
 wget -O /usr/bin/exp "https://raw.githubusercontent.com/natxanss/v2ray/main/exp.sh"
 wget -O /usr/bin/menu "https://raw.githubusercontent.com/natxanss/v2ray/main/menu.sh"
 
+curl ipinfo.io >> /etc/datadiri.conf
+
 #Membuat Command bisa digunakan
 chmod +x /usr/bin/addv2ray
 chmod +x /usr/bin/listv2ray
