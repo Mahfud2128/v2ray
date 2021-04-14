@@ -22,7 +22,7 @@ MYIP=$(wget -qO- ipv4.icanhazip.com)
 expp=$(date -d "$exp days" +"%d-%m-%Y")
 
 #sed -i '25d' /etc/v2ray/config.json
-sed -i "s/#default.*/#default\n\t #$user $expp\n\t  {\n\t    $aid: $aids, \n\t    $id: $ler$uuid$ler\n\t  },\n\t #$user $expp/" /etc/v2ray/config.json
+sed -i "s/#default.*/#default\n\t #$user $expp\n\t  {\n\t    $aid: $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #$user $expp/" /etc/v2ray/config.json
 sed -i "s/user/$user/" /etc/v2ray/data.json
 sed -i "s/uuid/$uuid/" /etc/v2ray/data.json
 sed -i "s+pathh+$path+" /etc/v2ray/data.json
