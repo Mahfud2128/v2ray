@@ -65,4 +65,4 @@ sed -i "s/$domain/domain/" /etc/v2ray/data.json
 #Penambahan user v2ray
 sed -i "s/#Username/#$user $expp\n#Username/" /etc/v2ray/user.txt
 
-systemctl disable v2ray && systemctl enable v2ray && systemctl start v2ray
+systemctl disable v2ray && systemctl enable v2ray && systemctl restart v2ray
