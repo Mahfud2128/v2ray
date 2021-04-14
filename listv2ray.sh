@@ -1,3 +1,5 @@
 #!/bin/bash
 clear
-cat /etc/v2ray/user.txt
+a=$(cat /etc/v2ray/user.txt | tr -s '#' '[>>]' | tr -d '#Username'
+
+echo -e "$a"
