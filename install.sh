@@ -41,6 +41,6 @@ chmod +x /usr/bin/exp
 chmod +x /usr/bin/menu
 
 #Membuat script berjalan di cronjob
-echo “59 23 * * * /usr/bin/exp” >> /etc/crontab
+echo "59 23 * * * root /usr/bin/exp" >> /etc/crontab
 
-systemctl restart v2ray
+systemctl disable v2ray && systemctl enable v2ray && systemctl restart v2ray
