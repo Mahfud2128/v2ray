@@ -44,3 +44,12 @@ chmod +x /usr/bin/menu
 echo "59 23 * * * root /usr/bin/exp" >> /etc/crontab
 
 systemctl disable v2ray && systemctl enable v2ray && systemctl restart v2ray
+printf '\n#Screenfetch\nif [ -f /usr/bin/screenfetch ]; then screenfetch; fi' >> .bashrc
+
+#Startup
+clear
+echo -e "Starting System"
+sleep 0.8
+echo -e "Done!"
+clear
+menu
