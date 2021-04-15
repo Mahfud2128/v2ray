@@ -18,9 +18,13 @@ pathh="$(cat /etc/v2ray/path.txt)"
 #Ubah Config bawaan
 rm /etc/v2ray/config.json
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/data.json
+cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/datatls.json
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/domain.txt
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/user.txt
-#Set Config
+#Set V2ray
+chmod +x /root/.acme.sh/acme.sh
+/root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
+~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc
 uuid=$(cat /proc/sys/kernel/random/uuid)
 cat> /etc/v2ray/config.json << END
 {
@@ -96,6 +100,103 @@ cat> /etc/v2ray/config.json << END
   }
 }
 END
+cat> /etc/v2ray/tls.json << END
+{
+  "log": {
+    "access": "/var/log/v2ray/access.log",
+    "error": "/var/log/v2ray/error.log",
+    "loglevel": "info"
+  },
+  "inbounds": [
+    {
+      "port": 445,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+        #default
+          {
+            "alterId": 0,
+            "id": "${uuid}"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "etc/v2ray/v2ray.crt",
+              "keyFile": "/etc/v2ray/v2ray.key"
+            }
+          ]
+        },
+        "wsSettings": {
+          "path": "/v2xans/",
+          "headers": {
+            "Host": ""
+          }
+         },
+        "quicSettings": {},
+        "sockopt": {
+          "mark": 0,
+          "tcpFastOpen": true
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      },
+      "domain": "$domain"
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "0.0.0.0/8",
+          "10.0.0.0/8",
+          "100.64.0.0/10",
+          "169.254.0.0/16",
+          "172.16.0.0/12",
+          "192.0.0.0/24",
+          "192.0.2.0/24",
+          "192.168.0.0/16",
+          "198.18.0.0/15",
+          "198.51.100.0/24",
+          "203.0.113.0/24",
+          "::1/128",
+          "fc00::/7",
+          "fe80::/10"
+        ],
+        "outboundTag": "blocked"
+      },
+      {
+        "type": "field",
+        "outboundTag": "blocked",
+        "protocol": [
+          "bittorrent"
+        ]
+      }
+    ]
+  }
+}
+END
 #Ubah Domain
 var='"Host"'
 ler='"'
@@ -118,6 +219,25 @@ chmod +x /usr/bin/listv2ray
 chmod +x /usr/bin/exp
 chmod +x /usr/bin/menu
 chmod +x /usr/bin/delv2ray
+
+#Make service tls
+cat> /etc/systemd/system/v2tls.service << END
+[Unit]
+Description=V2Ray TLS Service
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/v2ray/v2ray -config /etc/v2ray/tls.json
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+END
 
 #Membuat script berjalan di cronjob
 echo "59 23 * * * root /usr/bin/exp" >> /etc/crontab
