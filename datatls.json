@@ -1,0 +1,13 @@
+{
+    "v": "2",
+    "ps": "user",
+    "add": "domain",
+    "port": "80",
+    "id": "uuid",
+    "aid": "0",
+    "net": "ws",
+    "path": "pathh",
+    "type": "none",
+    "host": "",
+    "tls": "tls"
+}
