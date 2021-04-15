@@ -26,8 +26,8 @@ uuids='"$uuid"'
 ler='"'
 aids='0'
 path="$(grep -oP '(?<="path": ")[^"]*' /etc/v2ray/config.json)"
-#domain="$(grep -oP '(?<="domain": ")[^"]*' /etc/v2ray/domain.json)"
-domain="$(cat /etc/v2ray/domain.txt)"
+domain="$(grep -oP '(?<="Host": ")[^"]*' /etc/v2ray/domain.json)"
+#domain="$(cat /etc/v2ray/domain.txt)"
 
 MYIP=$(wget -qO- ipv4.icanhazip.com)
 expp=$(date -d "$exp days" +"%d-%m-%Y")
