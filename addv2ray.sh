@@ -26,20 +26,28 @@ uuids='"$uuid"'
 ler='"'
 aids='0'
 path="$(grep -oP '(?<="path": ")[^"]*' /etc/v2ray/config.json)"
-domain="$(grep -oP '(?<="Host": ")[^"]*' /etc/v2ray/domain.json)"
+domain="$(grep -oP '(?<="Host": ")[^"]*' /etc/v2ray/config.json)"
 #domain="$(cat /etc/v2ray/domain.txt)"
 
 MYIP=$(wget -qO- ipv4.icanhazip.com)
 expp=$(date -d "$exp days" +"%d-%m-%Y")
 
-#sed -i '25d' /etc/v2ray/config.json
+#V2RAY NON TLS
 sed -i "s/#default.*/#default\n\t #$user $expp\n\t  {\n\t    $aid: $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #$user $expp/" /etc/v2ray/config.json
 sed -i "s/user/$user/" /etc/v2ray/data.json
 sed -i "s/uuid/$uuid/" /etc/v2ray/data.json
 sed -i "s+pathh+$path+" /etc/v2ray/data.json
 sed -i "s/domain/$domain/" /etc/v2ray/data.json
 
+#V2RAY TLS
+sed -i "s/#default.*/#default\n\t #$user $expp\n\t  {\n\t    $aid: $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #$user $expp/" /etc/v2ray/tls.json
+sed -i "s/user/$user/" /etc/v2ray/datatls.json
+sed -i "s/uuid/$uuid/" /etc/v2ray/datatls.json
+sed -i "s+pathh+$path+" /etc/v2ray/datatls.json
+sed -i "s/domain/$domain/" /etc/v2ray/datatls.json
+
 hasil=$(base64 /etc/v2ray/data.json | tr -d "\n")
+hasil2=$(base64 /etc/v2ray/datatls.json | tr -d "\n")
 
 echo -e "Processing..."
 sleep 0.2
@@ -51,21 +59,23 @@ echo -e "=========================="
 echo -e "[>>]Username: $user"
 echo -e "[>>]Domain: $domain"
 echo -e "[>>]IP: $MYIP"
-echo -e "[>>]Port: 80"
+echo -e "[>>]Port none tls: 80"
+echo -e "[>>]Port tls: 445"
 echo -e "[>>]UUID: $uuid"
 echo -e "[>>]AlterId: 0"
 echo -e "[>>]Security: Auto"
-echo -e "[>>]TLs: None"
+echo -e "[>>]TLs: None & TLS"
 echo -e "[>>]Path: $path"
 echo -e "[>>]Host: None"
 echo -e "[>>]Expired: $expp"
 echo -e "=========================="
 echo -e "Terima Kasih Banyak"
 echo -e "=========================="
-echo -e "Link Vmess"
-echo -e "=========================="
-echo -e ""
+echo -e "[NON TLS PORT 80]"
 echo -e "vmess://$hasil"
+echo -e "=========================="
+echo -e "[TLS PORT 445]"
+echo -e "vmess://$hasil2"
 echo -e "\nPremium Script Make by XansTech"
 
 #Pengulangan data.json
@@ -74,7 +84,14 @@ sed -i "s/$uuid/uuid/" /etc/v2ray/data.json
 sed -i "s+$path+pathh+" /etc/v2ray/data.json
 sed -i "s/$domain/domain/" /etc/v2ray/data.json
 
+#Pengulangan tls.json
+sed -i "s/$user/user/" /etc/v2ray/datatls.json
+sed -i "s/$uuid/uuid/" /etc/v2ray/datatls.json
+sed -i "s+$path+pathh+" /etc/v2ray/datatls.json
+sed -i "s/$domain/domain/" /etc/v2ray/datatls.json
+
 #Penambahan user v2ray
 sed -i "s/#Username/#$user $expp\n#Username/" /etc/v2ray/user.txt
 
 systemctl restart v2ray
+systemctl restart v2tls
