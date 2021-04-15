@@ -113,7 +113,7 @@ cat> /etc/v2ray/tls.json << END
       "protocol": "vmess",
       "settings": {
         "clients": [
-        #default
+         #default
           {
             "alterId": 0,
             "id": "${uuid}"
