@@ -19,7 +19,6 @@ pathh="$(cat /etc/v2ray/path.txt)"
 rm /etc/v2ray/config.json
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/data.json
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/datatls.json
-cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/domain.txt
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/user.txt
 #Set V2ray
 chmod +x /root/.acme.sh/acme.sh
@@ -197,12 +196,6 @@ cat> /etc/v2ray/tls.json << END
   }
 }
 END
-#Ubah Domain
-var='"Host"'
-ler='"'
-
-sed -i "s/dom/$domain/" /etc/v2ray/domain.txt
-sed -i "s/$var.*/$var: $ler$domain$ler/" /etc/v2ray/config.json
 
 #Download Command
 wget -O /usr/bin/addv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/addv2ray.sh"
