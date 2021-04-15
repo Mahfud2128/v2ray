@@ -5,6 +5,17 @@ clear
 read -p "Username: " user
 read -p "Exp: " exp
 
+if grep -qc "$user" /etc/v2ray/config.json
+then
+        echo "Checking..."
+        sleep 0.5
+        echo -e "User Sudah Ada!"
+        exit
+else
+        echo "Checking"
+        echo -e "Oke lanjut"
+fi
+
 uuid="$(cat /proc/sys/kernel/random/uuid)"
 client='"clients":'
 clients='"clients"'
@@ -53,6 +64,7 @@ echo -e "Terima Kasih Banyak"
 echo -e "=========================="
 echo -e "Link Vmess"
 echo -e "=========================="
+echo -e ""
 echo -e "vmess://$hasil"
 echo -e "\nPremium Script Make by XansTech"
 
@@ -65,4 +77,4 @@ sed -i "s/$domain/domain/" /etc/v2ray/data.json
 #Penambahan user v2ray
 sed -i "s/#Username/#$user $expp\n#Username/" /etc/v2ray/user.txt
 
-systemctl disable v2ray && systemctl enable v2ray && systemctl restart v2ray
+systemctl restart v2ray
