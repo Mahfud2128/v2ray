@@ -48,7 +48,8 @@ chmod +x /usr/bin/delv2ray
 echo "59 23 * * * root /usr/bin/exp" >> /etc/crontab
 
 systemctl disable v2ray && systemctl enable v2ray && systemctl restart v2ray
-printf '\n#Screenfetch\nif [ -f /usr/bin/menu ]; then clear && menu; fi' >> .bashrc
+
+printf '\n#Screenfetch\nif [ -f /usr/bin/menu ]; then clear && menu; fi' >> /root/.bashrc
 
 #Startup
 clear
