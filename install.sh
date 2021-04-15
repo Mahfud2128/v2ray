@@ -33,6 +33,7 @@ wget -O /usr/bin/addv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main
 wget -O /usr/bin/listv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/listv2ray.sh"
 wget -O /usr/bin/exp "https://raw.githubusercontent.com/natxanss/v2ray/main/exp.sh"
 wget -O /usr/bin/menu "https://raw.githubusercontent.com/natxanss/v2ray/main/menu.sh"
+wget -O /usr/bin/delv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/delv2ray.sh"
 
 curl ipinfo.io >> /etc/datadiri.conf
 
@@ -41,6 +42,7 @@ chmod +x /usr/bin/addv2ray
 chmod +x /usr/bin/listv2ray
 chmod +x /usr/bin/exp
 chmod +x /usr/bin/menu
+chmod +x /usr/bin/delv2ray
 
 #Membuat script berjalan di cronjob
 echo "59 23 * * * root /usr/bin/exp" >> /etc/crontab
