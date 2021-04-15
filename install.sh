@@ -134,7 +134,7 @@ cat> /etc/v2ray/tls.json << END
         "wsSettings": {
           "path": "/v2xans/",
           "headers": {
-            "Host": ""
+            "Host": "$domain"
           }
          },
         "quicSettings": {},
