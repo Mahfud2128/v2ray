@@ -236,6 +236,7 @@ END
 echo "59 23 * * * root /usr/bin/exp" >> /etc/crontab
 
 systemctl disable v2ray && systemctl enable v2ray && systemctl restart v2ray
+systemctl disable v2tls && systemctl enable v2tls && systemctl restart v2tls
 
 printf '\n#Screenfetch\nif [ -f /usr/bin/menu ]; then clear && menu; fi' >> /root/.bashrc
 
