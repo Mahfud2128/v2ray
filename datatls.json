@@ -2,7 +2,7 @@
     "v": "2",
     "ps": "user",
     "add": "domain",
-    "port": "80",
+    "port": "445",
     "id": "uuid",
     "aid": "0",
     "net": "ws",
