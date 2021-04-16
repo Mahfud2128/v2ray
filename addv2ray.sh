@@ -5,7 +5,7 @@ clear
 read -p "Username: " user
 read -p "Exp: " exp
 
-if grep -qc "$user" /etc/v2ray/config.json
+if grep -qc "${user}-XTC" /etc/v2ray/config.json
 then
         echo "Checking..."
         sleep 0.5
@@ -33,14 +33,14 @@ MYIP=$(wget -qO- ipv4.icanhazip.com)
 expp=$(date -d "$exp days" +"%d-%m-%Y")
 
 #V2RAY NON TLS
-sed -i "s/#default.*/#default\n\t #$user $expp\n\t  {\n\t    $aid: $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #$user $expp/" /etc/v2ray/config.json
+sed -i "s/#default.*/#default\n\t #${user}-XTC $expp\n\t  {\n\t    $aid: $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #${user}-XTC $expp/" /etc/v2ray/config.json
 sed -i "s/user/$user/" /etc/v2ray/data.json
 sed -i "s/uuid/$uuid/" /etc/v2ray/data.json
 sed -i "s+pathh+$path+" /etc/v2ray/data.json
 sed -i "s/domain/$domain/" /etc/v2ray/data.json
 
 #V2RAY TLS
-sed -i "s/#default.*/#default\n\t #$user $expp\n\t  {\n\t    $aid: $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #$user $expp/" /etc/v2ray/tls.json
+sed -i "s/#default.*/#default\n\t #${user}-XTC $expp\n\t  {\n\t    $aid: $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #${user}-XTC $expp/" /etc/v2ray/tls.json
 sed -i "s/user/$user/" /etc/v2ray/datatls.json
 sed -i "s/uuid/$uuid/" /etc/v2ray/datatls.json
 sed -i "s+pathh+$path+" /etc/v2ray/datatls.json
@@ -56,7 +56,7 @@ echo -e "Success!"
 echo -e "=========================="
 echo -e "Xans Tech Configuration"
 echo -e "=========================="
-echo -e "[>>]Username: $user"
+echo -e "[>>]Username: ${user}-XTC"
 echo -e "[>>]Domain: $domain"
 echo -e "[>>]IP: $MYIP"
 echo -e "[>>]Port none tls: 80"
@@ -91,7 +91,7 @@ sed -i "s+$path+pathh+" /etc/v2ray/datatls.json
 sed -i "s/$domain/domain/" /etc/v2ray/datatls.json
 
 #Penambahan user v2ray
-sed -i "s/#Username/#$user $expp\n#Username/" /etc/v2ray/user.txt
+sed -i "s/#Username/#${user}-XTC $expp\n#Username/" /etc/v2ray/user.txt
 
 systemctl restart v2ray
 systemctl restart v2tls
