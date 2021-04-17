@@ -196,6 +196,90 @@ cat> /etc/v2ray/tls.json << END
   }
 }
 END
+cat> /etc/v2ray/trojan.json << END
+{
+  "log": {
+    "access": "/var/log/v2ray/access.log",
+    "error": "/var/log/v2ray/error.log",
+    "loglevel": "info"
+  },
+  "inbounds": [
+    {
+      "port": 445,
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+         #default
+          {
+            "password": "oEhqyW8D"
+          }
+        ],
+        "fallbacks": [
+          {
+            "dest": 80
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "tls",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "etc/v2ray/v2ray.crt",
+              "keyFile": "/etc/v2ray/v2ray.key"
+            }
+          ],
+          "alpn": [
+            "http/1.1"
+          ]
+        },
+        "tcpSettings": {},
+        "kcpSettings": {},
+        "wsSettings": {},
+        "httpSettings": {},
+        "quicSettings": {}
+      },
+      "domain": "${domain}"
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "0.0.0.0/8",
+          "10.0.0.0/8",
+          "100.64.0.0/10",
+          "169.254.0.0/16",
+          "172.16.0.0/12",
+          "192.0.0.0/24",
+          "192.0.2.0/24",
+          "192.168.0.0/16",
+          "198.18.0.0/15",
+          "198.51.100.0/24",
+          "203.0.113.0/24",
+          "::1/128",
+          "fc00::/7",
+          "fe80::/10"
+        ],
+        "outboundTag": "blocked"
+      }
+    ]
+  }
+}
+END
 
 #Download Command
 wget -O /usr/bin/addv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/addv2ray.sh"
@@ -233,7 +317,7 @@ WantedBy=multi-user.target
 END
 
 #Membuat script berjalan di cronjob
-echo "59 23 * * * root /usr/bin/exp" >> /etc/crontab
+echo "59 23 * * * root exp" >> /etc/crontab
 
 systemctl disable v2ray && systemctl enable v2ray && systemctl restart v2ray
 systemctl disable v2tls && systemctl enable v2tls && systemctl restart v2tls
