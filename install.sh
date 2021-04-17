@@ -288,11 +288,12 @@ wget -O /usr/bin/listv2ray "https://raw.githubusercontent.com/natxanss/v2ray/mai
 wget -O /usr/bin/exp "https://raw.githubusercontent.com/natxanss/v2ray/main/exp.sh"
 wget -O /usr/bin/menu "https://raw.githubusercontent.com/natxanss/v2ray/main/menu.sh"
 wget -O /usr/bin/delv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/delv2ray.sh"
-wget -O /usr/bin/delv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/addtrojan.sh"
-wget -O /usr/bin/delv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/deltrojan.sh"
-wget -O /usr/bin/delv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/exptrojan.sh"
-wget -O /usr/bin/delv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/listtrojan.sh"
+wget -O /usr/bin/addtrojan "https://raw.githubusercontent.com/natxanss/v2ray/main/addtrojan.sh"
+wget -O /usr/bin/deltrojan "https://raw.githubusercontent.com/natxanss/v2ray/main/deltrojan.sh"
+wget -O /usr/bin/exptrojan "https://raw.githubusercontent.com/natxanss/v2ray/main/exptrojan.sh"
+wget -O /usr/bin/listtrojan "https://raw.githubusercontent.com/natxanss/v2ray/main/listtrojan.sh"
 
+rm /etc/datadiri.conf
 curl ipinfo.io >> /etc/datadiri.conf
 
 #Membuat Command bisa digunakan
