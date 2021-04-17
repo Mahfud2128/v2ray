@@ -20,6 +20,7 @@ rm /etc/v2ray/config.json
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/data.json
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/datatls.json
 cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/user.txt
+cd /etc/v2ray && wget https://raw.githubusercontent.com/natxanss/v2ray/main/usertrojan.txt
 #Set V2ray
 chmod +x /root/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
@@ -205,7 +206,7 @@ cat> /etc/v2ray/trojan.json << END
   },
   "inbounds": [
     {
-      "port": 445,
+      "port": 446,
       "protocol": "trojan",
       "settings": {
         "clients": [
@@ -287,6 +288,10 @@ wget -O /usr/bin/listv2ray "https://raw.githubusercontent.com/natxanss/v2ray/mai
 wget -O /usr/bin/exp "https://raw.githubusercontent.com/natxanss/v2ray/main/exp.sh"
 wget -O /usr/bin/menu "https://raw.githubusercontent.com/natxanss/v2ray/main/menu.sh"
 wget -O /usr/bin/delv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/delv2ray.sh"
+wget -O /usr/bin/delv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/addtrojan.sh"
+wget -O /usr/bin/delv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/deltrojan.sh"
+wget -O /usr/bin/delv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/exptrojan.sh"
+wget -O /usr/bin/delv2ray "https://raw.githubusercontent.com/natxanss/v2ray/main/listtrojan.sh"
 
 curl ipinfo.io >> /etc/datadiri.conf
 
@@ -296,6 +301,10 @@ chmod +x /usr/bin/listv2ray
 chmod +x /usr/bin/exp
 chmod +x /usr/bin/menu
 chmod +x /usr/bin/delv2ray
+chmod +x /usr/bin/addtrojan
+chmod +x /usr/bin/deltrojan
+chmod +x /usr/bin/exptrojan
+chmod +x /usr/bin/listtrojan
 
 #Make service tls
 cat> /etc/systemd/system/v2tls.service << END
@@ -316,11 +325,32 @@ Restart=on-failure
 WantedBy=multi-user.target
 END
 
+#Make Service Trojan
+cat> /etc/systemd/system/trojan.service << END
+[Unit]
+Description=Trojan Service
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/v2ray/v2ray -config /etc/v2ray/trojan.json
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+END
+
 #Membuat script berjalan di cronjob
 echo "59 23 * * * root exp" >> /etc/crontab
+echo "59 23 * * * root exptrojan" >> /etc/crontab
 
 systemctl disable v2ray && systemctl enable v2ray && systemctl restart v2ray
 systemctl disable v2tls && systemctl enable v2tls && systemctl restart v2tls
+systemctl disable trojan && systemctl enable trojan && systemctl restart trojan
 
 printf '\n#Screenfetch\nif [ -f /usr/bin/menu ]; then clear && menu; fi' >> /root/.bashrc
 
