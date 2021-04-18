@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 listv2ray
-echo -e "Masukan Username yang ingin dihapus"
+echo -e "Masukan Username yang ingin dihapus (tanpa -XTC)"
 read -p "Username: " user
 
 if grep -qc "${user}-XTC" /etc/v2ray/config.json
