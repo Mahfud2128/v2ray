@@ -6,7 +6,7 @@ read -p "Username: " user
 
 if grep -qc "${user}-XTC" /etc/v2ray/config.json
 then
-        sed -i -e "/#${user}-XTC.*/,/${user}-XTC.*$/d" /etc/v2ray/trojan.json
+        sed -i -e "/#${user}-XTC.*/,/#${user}-XTC.*$/d" /etc/v2ray/trojan.json
         sed -i -e "/#${user}-XTC.*/d" /etc/v2ray/usertrojan.txt
         systemctl restart trojan
         listtrojan
