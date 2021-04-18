@@ -25,7 +25,7 @@ MYIP=$(wget -qO- ipv4.icanhazip.com)
 expp=$(date -d "$exp days" +"%d-%m-%Y")
 
 #Write User
-sed -i "s/#default.*/#default\n\t #${user}-XTC $expp\n\t  {\n\t    $pw: $lir${user}-XTC$lir\n\t  },\n\t #${user}-XTC $expp/" /etc/v2ray/trojan.json
+sed -i "s/#default.*/#default\n\t #${user}-XTC $expp\n\t  {\n\t    $pw: $lir${user}$lir\n\t  },\n\t #${user}-XTC $expp/" /etc/v2ray/trojan.json
 
 #Hasil
 hasil="${user}-XTC@${domain}:446?sni=isisendiri"
