@@ -28,7 +28,7 @@ expp=$(date -d "$exp days" +"%d-%m-%Y")
 sed -i "s/#default.*/#default\n\t #${user}-XTC $expp\n\t  {\n\t    $pw: $lir${user}$lir\n\t  },\n\t #${user}-XTC $expp/" /etc/v2ray/trojan.json
 
 #Hasil
-hasil="${user}-XTC@${domain}:446?sni=isisendiri"
+hasil="${user}@${domain}:446?sni=isisendiri"
 
 #Print
 echo -e "Processing..."
@@ -42,7 +42,7 @@ echo -e "[>>]Username: ${user}-XTC"
 echo -e "[>>]IP: $MYIP"
 echo -e "[>>]Domain: $domain"
 echo -e "[>>]SNI: Isi sendiri ya"
-echo -e "[>>]Password: ${user}-XTC"
+echo -e "[>>]Password: ${user}"
 echo -e "[>>]TLS: Yes"
 echo -e "=========================="
 echo -e "Terima Kasih Banyak"
