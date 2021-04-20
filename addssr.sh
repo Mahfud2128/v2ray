@@ -33,7 +33,7 @@ echo -e "${Info} Penambahan user berhasil [username: ${ssr_user}]"
 echo -e "### $ssr_user $exp" >> /usr/local/shadowsocksr/akun.conf
 tmp1=$(echo -n "${ssr_password}" | base64 | tr -d "\n")
 SSRobfs=$(echo ${ssr_obfs} | sed 's/_compatible//g')
-tmp2=$(echo "$IP:${ssr_port}:${ssr_protocol}:${ssr_method}:${SSRobfs}:${tmp1}/obfsparam=" | base64)
+tmp2=$(echo "$IP:${ssr_port}:${ssr_protocol}:${ssr_method}:${SSRobfs}:${tmp1}/obfsparam=" | base64 | tr -d "\n")
 ssr_link="ssr://${tmp2}"
 /etc/init.d/ssrmu restart
 IP=$(wget -qO- ifconfig.co);
@@ -41,14 +41,14 @@ clear
 echo -e "================================="
 echo -e " Xans Tech SSR Configuration"
 echo -e "================================="
-echo -e "[>>]IP: ${IP}"
-echo -e "[>>]Port: ${ssr_port}"
-echo -e "[>>]Password: ${ssr_password}"
-echo -e "[>>]Encryption: ${ssr_method}"
-echo -e "[>>]Protocol: ${Red_font_prefix}${ssr_protocol}"
-echo -e "[>>]Obfs: ${Red_font_prefix}${ssr_obfs}"
-echo -e "[>>]Device limit: ${ssr_protocol_param}"
-echo -e "[>>]Expired On: ${exp} "
+echo -e "IP         : ${IP}"
+echo -e "Port       : ${ssr_port}"
+echo -e "Password   : ${ssr_password}"
+echo -e "Encryption : ${ssr_method}"
+echo -e "Protocol   : ${Red_font_prefix}${ssr_protocol}"
+echo -e "Obfs       : ${Red_font_prefix}${ssr_obfs}"
+echo -e "Limit      : ${ssr_protocol_param}"
+echo -e "Expired On : ${exp} "
 echo -e "================================="
 echo -e " ${ssr_link}"
 echo -e "================================="
