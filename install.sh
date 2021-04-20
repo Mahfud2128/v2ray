@@ -14,6 +14,7 @@ apt-get install uuid
 #Thanks to Jhrory
 source <(curl -sL https://multi.netlify.app/v2ray.sh)
 pathh="$(cat /etc/v2ray/path.txt)"
+timedatectl set-timezone Asia/Jakarta
 
 #Ubah Config bawaan
 rm /etc/v2ray/config.json
