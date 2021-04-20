@@ -146,6 +146,7 @@ wget -O /usr/bin/ssr https://raw.githubusercontent.com/natxanss/v2ray/main/ssrmu
 wget -O /usr/bin/addssr https://raw.githubusercontent.com/natxanss/v2ray/main/addssr.sh && chmod +x /usr/bin/addssr
 wget -O /usr/bin/delssr https://raw.githubusercontent.com/natxanss/v2ray/main/delssr.sh && chmod +x /usr/bin/delssr
 wget -O /usr/bin/expssr https://raw.githubusercontent.com/natxanss/v2ray/main/expssr.sh && chmod +x /usr/bin/expssr
+wget -O /usr/bin/expssr https://raw.githubusercontent.com/natxanss/v2ray/main/listssr.sh && chmod +x /usr/bin/listssr
 touch /usr/local/shadowsocksr/akun.conf
 rm -f /root/ssr.sh
 echo "0 0 * * * root expssr" >> /etc/crontab
