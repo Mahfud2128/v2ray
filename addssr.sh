@@ -31,9 +31,9 @@ match_add=$(python mujson_mgr.py -a -u "${ssr_user}" -p "${ssr_port}" -k "${ssr_
 cd
 echo -e "${Info} Penambahan user berhasil [username: ${ssr_user}]"
 echo -e "### $ssr_user $exp" >> /usr/local/shadowsocksr/akun.conf
-tmp1=$(echo -n "${ssr_password}" | base64 -w0 | sed 's/=//g;s/\//_/g;s/+/-/g')
+tmp1=$(echo -n "${ssr_password}" | base64 | tr -d "\n")
 SSRobfs=$(echo ${ssr_obfs} | sed 's/_compatible//g')
-tmp2=$(echo -n "$IP:${ssr_port}:${ssr_protocol}:${ssr_method}:${SSRobfs}:${tmp1}/obfsparam=" | base64 -w0)
+tmp2=$(echo "$IP:${ssr_port}:${ssr_protocol}:${ssr_method}:${SSRobfs}:${tmp1}/obfsparam=" | base64)
 ssr_link="ssr://${tmp2}"
 /etc/init.d/ssrmu restart
 IP=$(wget -qO- ifconfig.co);
