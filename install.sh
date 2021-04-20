@@ -5,10 +5,6 @@
 echo -e "Pastikan domain sudah dipersiapkan untuk vmess"
 read -p "Domain: " domain
 
-#Checking Dependencies
-apt-get install git
-apt-get install wget
-apt-get install uuid
 
 #Make installation for v2ray
 #Thanks to Jhrory
