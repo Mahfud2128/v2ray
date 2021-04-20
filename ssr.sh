@@ -126,7 +126,7 @@ if [[ ${OS} == "centos" ]]; then
 }
 Start_SSR(){
         check_pid
-        wget -O /etc/init.d/ssrmu "http://juki.my.id/script/vpn/ssrmu"
+        wget -O /etc/init.d/ssrmu "https://raw.githubusercontent.com/natxanss/v2ray/main/ssrmu"
         /etc/init.d/ssrmu start
 }
 Install_SSR(){
@@ -142,11 +142,11 @@ Save_iptables
 Start_SSR
 }
 Install_SSR
-wget -O /usr/bin/ssr http://juki.my.id/script/vpn/ssrmu.sh && chmod +x /usr/bin/ssr
+wget -O /usr/bin/ssr https://raw.githubusercontent.com/natxanss/v2ray/main/ssrmu.sh && chmod +x /usr/bin/ssr
 wget -O /usr/bin/addssr http://juki.my.id/script/vpn/addssr.sh && chmod +x /usr/bin/addssr
 wget -O /usr/bin/delssr http://juki.my.id/script/vpn/delssr.sh && chmod +x /usr/bin/delssr
 wget -O /usr/bin/expssr http://juki.my.id/script/vpn/expssr.sh && chmod +x /usr/bin/expssr
 wget -O /usr/bin/ressr http://juki.my.id/script/vpn/ressr.sh && chmod +x /usr/bin/ressr
 touch /usr/local/shadowsocksr/akun.conf
 rm -f /root/ssr.sh
-echo "0 0 * * * root xp-ssr" >> /etc/crontab
+echo "0 0 * * * root expssr" >> /etc/crontab
