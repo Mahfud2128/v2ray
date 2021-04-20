@@ -1,41 +1,49 @@
 #!/bin/bash
-IP=$(wget -qO- icanhazip.com);
-echo "Please enter the username you want to set (do not repeat, does not support Chinese, will be reported incorrect!)"
-read -e -p "(Default: ):" ssr_user
-CLIENT_EXISTS=$(grep -w $ssr_user /usr/local/shadowsocksr/akun.conf | wc -l)
-if [[ ${CLIENT_EXISTS} == '1' ]]; then
-echo ""
-echo "A client with the specified name was already created, please choose another name."
-exit 1
-fi
-read -p "Expired (days): " masaaktif
-exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
-lastport=$(cat /usr/local/shadowsocksr/mudb.json | grep '"port": ' | tail -n1 | awk '{print $2}' | cut -d "," -f 1 | cut -d ":" -f 1 )
-if [[ $lastport == '' ]]; then
-ssr_port=1443
+#Script make by Xans Tech
+clear
+read -p "Username: " user
+read -p "Exp: " exp
+
+if grep -qc "${user}-XTC" /etc/v2ray/config.json
+then
+        echo "Checking..."
+        sleep 0.5
+        echo -e "User Sudah Ada!"
+        exit
 else
-ssr_port=$((lastport+1))
+        echo "Checking"
+        echo -e "Oke lanjut"
 fi
-ssr_password="$ssr_user"
-ssr_method="aes-256-cfb"
-ssr_protocol="origin"
-ssr_obfs="tls1.2_ticket_auth_compatible"
-ssr_protocol_param="2"
-ssr_speed_limit_per_con=0
-ssr_speed_limit_per_user=0
-ssr_transfer="838868"
-ssr_forbid="bittorrent"
-cd /usr/local/shadowsocksr
-match_add=$(python mujson_mgr.py -a -u "${ssr_user}" -p "${ssr_port}" -k "${ssr_password}" -m "${ssr_method}" -O "${ssr_protocol}" -G "${ssr_protocol_param}" -o "${ssr_obfs}" -s "${ssr_speed_limit_per_con}" -S "${ssr_speed_limit_per_user}" -t "${ssr_transfer}" -f "${ssr_forbid}"|grep -w "add user info")
-cd
-echo -e "${Info} Penambahan user berhasil [username: ${ssr_user}]"
-echo -e "### $ssr_user $exp" >> /usr/local/shadowsocksr/akun.conf
-tmp1=$(echo -n "${ssr_password}" | base64 -w0 | sed 's/=//g;s/\//_/g;s/+/-/g')
-SSRobfs=$(echo ${ssr_obfs} | sed 's/_compatible//g')
-tmp2=$(echo -n "$IP:${ssr_port}:${ssr_protocol}:${ssr_method}:${SSRobfs}:${tmp1}/obfsparam=" | base64 -w0)
-ssr_link="ssr://${tmp2}"
-/etc/init.d/ssrmu restart
-IP=$(wget -qO- ifconfig.co);
+uuid="$(cat /proc/sys/kernel/random/uuid)"
+client='"clients":'
+clients='"clients"'
+users='"$user"'
+id='"id"'
+aid='"alterId"'
+uuids='"$uuid"'
+ler='"'
+aids='0'
+path="$(grep -oP '(?<="path": ")[^"]*' /etc/v2ray/config.json)"
+domain="$(grep -oP '(?<="Host": ")[^"]*' /etc/v2ray/config.json)"
+#domain="$(cat /etc/v2ray/domain.txt)"
+MYIP=$(wget -qO- ipv4.icanhazip.com)
+expp=$(date -d "$exp days" +"%d-%m-%Y")
+
+#V2RAY NON TLS
+sed -i "s/#default.*/#default\n\t #${user}-XTC $expp\n\t  {\n\t    $aid: $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #${user}-XTC $expp/" /etc/v2ray/config.json
+sed -i "s/user/$user/" /etc/v2ray/data.json
+sed -i "s/uuid/$uuid/" /etc/v2ray/data.json
+sed -i "s+pathh+$path+" /etc/v2ray/data.json
+sed -i "s/domain/$domain/" /etc/v2ray/data.json
+
+#V2RAY TLS
+sed -i "s/#default.*/#default\n\t #${user}-XTC $expp\n\t  {\n\t    $aid: $aids,\n\t    $id: $ler$uuid$ler\n\t  },\n\t #${user}-XTC $expp/" /etc/v2ray/tls.json
+sed -i "s/user/$user/" /etc/v2ray/datatls.json
+sed -i "s/uuid/$uuid/" /etc/v2ray/datatls.json
+sed -i "s+pathh+$path+" /etc/v2ray/datatls.json
+sed -i "s/domain/$domain/" /etc/v2ray/datatls.json
+hasil=$(base64 /etc/v2ray/data.json | tr -d "\n")
+hasil2=$(base64 /etc/v2ray/datatls.json | tr -d "\n")
 echo -e "Processing..."
 sleep 0.2
 clear
@@ -43,16 +51,40 @@ echo -e "Success!"
 echo -e "=========================="
 echo -e "Xans Tech Configuration"
 echo -e "=========================="
-echo -e "IP            : ${IP}"
-echo -e "Port          : ${ssr_port}"
-echo -e "Password      : ${ssr_password}"
-echo -e "Encryption    : ${ssr_method}"
-echo -e "Protocol      : ${Red_font_prefix}${ssr_protocol}"
-echo -e "Obfs          : ${Red_font_prefix}${ssr_obfs}"
-echo -e "Device limit  : ${ssr_protocol_param}"
-echo -e "Expired On    : ${exp} "
+echo -e "Username : ${user}-XTC"
+echo -e "Domain   : $domain"
+echo -e "IP       : $MYIP"
+echo -e "None TLS : 80"
+echo -e "TLS      : 445"
+echo -e "UUID     : $uuid"
+echo -e "AlterId  : 0"
+echo -e "Security : Auto"
+echo -e "TLs      : None & TLS"
+echo -e "Path     : $path"
+echo -e "Host     : None"
+echo -e "Expired  : $expp"
 echo -e "=========================="
 echo -e "Terima Kasih Banyak"
 echo -e "=========================="
-echo -e "Link SSR      : ${ssr_link}"
+echo -e "[NON TLS PORT 80]"
+echo -e "vmess://$hasil"
+echo -e "=========================="
+echo -e "[TLS PORT 445]"
+echo -e "vmess://$hasil2"
 echo -e "\nPremium Script Make by XansTech"
+#Pengulangan data.json
+sed -i "s/$user/user/" /etc/v2ray/data.json
+sed -i "s/$uuid/uuid/" /etc/v2ray/data.json
+sed -i "s+$path+pathh+" /etc/v2ray/data.json
+sed -i "s/$domain/domain/" /etc/v2ray/data.json
+#Pengulangan tls.json
+sed -i "s/$user/user/" /etc/v2ray/datatls.json
+sed -i "s/$uuid/uuid/" /etc/v2ray/datatls.json
+sed -i "s+$path+pathh+" /etc/v2ray/datatls.json
+sed -i "s/$domain/domain/" /etc/v2ray/datatls.json
+
+#Penambahan user v2ray
+sed -i "s/#Username/#${user}-XTC $expp\n#Username/" /etc/v2ray/user.txt
+
+systemctl restart v2ray
+systemctl restart v2tls
