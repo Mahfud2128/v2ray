@@ -143,10 +143,9 @@ Start_SSR
 }
 Install_SSR
 wget -O /usr/bin/ssr https://raw.githubusercontent.com/natxanss/v2ray/main/ssrmu.sh && chmod +x /usr/bin/ssr
-wget -O /usr/bin/addssr http://juki.my.id/script/vpn/addssr.sh && chmod +x /usr/bin/addssr
-wget -O /usr/bin/delssr http://juki.my.id/script/vpn/delssr.sh && chmod +x /usr/bin/delssr
-wget -O /usr/bin/expssr http://juki.my.id/script/vpn/expssr.sh && chmod +x /usr/bin/expssr
-wget -O /usr/bin/ressr http://juki.my.id/script/vpn/ressr.sh && chmod +x /usr/bin/ressr
+wget -O /usr/bin/addssr https://raw.githubusercontent.com/natxanss/v2ray/main/addssr.sh && chmod +x /usr/bin/addssr
+wget -O /usr/bin/delssr https://raw.githubusercontent.com/natxanss/v2ray/main/delssr.sh && chmod +x /usr/bin/delssr
+wget -O /usr/bin/expssr https://raw.githubusercontent.com/natxanss/v2ray/main/expssr.sh && chmod +x /usr/bin/expssr
 touch /usr/local/shadowsocksr/akun.conf
 rm -f /root/ssr.sh
 echo "0 0 * * * root expssr" >> /etc/crontab
