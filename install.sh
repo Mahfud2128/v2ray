@@ -352,9 +352,7 @@ systemctl disable v2ray && systemctl enable v2ray && systemctl restart v2ray
 systemctl disable v2tls && systemctl enable v2tls && systemctl restart v2tls
 systemctl disable trojan && systemctl enable trojan && systemctl restart trojan
 
-wget https://raw.githubusercontent.com/natxanss/v2ray/main/ssr.sh && chmod +x ssr.sh && ./ssr.sh
-
-printf '\n#Screenfetch\nif [ -f /usr/bin/menu ]; then clear && menu; fi' >> /root/.bashrc
+printf '\n#Screenfetch\nif [ -f /usr/bin/menu ]; then clear && neofetch && menu; fi' >> /root/.bashrc
 
 #Startup
 clear
