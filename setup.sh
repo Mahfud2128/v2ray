@@ -6,6 +6,7 @@ fi
 if [ "$(systemd-detect-virt)" == "openvz" ]; then
                 echo "OpenVZ is not supported"
                 exit 1
+fi    
 #install v2ray
 rm -f install.sh
 wget https://raw.githubusercontent.com/natxanss/v2ray/main/install.sh && chmod +x install.sh && ./install.sh
