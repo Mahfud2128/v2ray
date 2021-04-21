@@ -250,7 +250,6 @@ wget -O usage "https://raw.githubusercontent.com/natxanss/v2ray/main/ram.sh"
 wget -O autokill "https://raw.githubusercontent.com/natxanss/v2ray/main/autokill.sh"
 wget -O ceklim "https://raw.githubusercontent.com/natxanss/v2ray/main/ceklim.sh"
 wget -O tendang "https://raw.githubusercontent.com/natxanss/v2ray/main/tendang.sh"
-echo "0 5 * * * root reboot" >> /etc/crontab
 
 chmod +x addssh
 chmod +x delssh
@@ -298,5 +297,4 @@ rm -f /root/ssh-vpn.sh
 
 # finihsing
 clear
-neofetch
 netstat -nutlp
