@@ -16,6 +16,10 @@ wget https://raw.githubusercontent.com/natxanss/v2ray/main/ssr.sh && chmod +x ss
 rm -f ssh-vpn.sh
 wget https://raw.githubusercontent.com/natxanss/v2ray/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 
+rm -f rm -f ssh-vpn.sh
+rm -f ssr.sh
+rm -f install.sh
+
 sleep 0.8
 clear
 neofetch
