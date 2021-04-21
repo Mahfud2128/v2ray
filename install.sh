@@ -359,5 +359,3 @@ clear
 echo -e "Starting System"
 sleep 0.8
 echo -e "Done!"
-clear
-menu
