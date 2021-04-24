@@ -291,6 +291,7 @@ wget -O /usr/bin/addtrojan "https://raw.githubusercontent.com/natxanss/v2ray/mai
 wget -O /usr/bin/deltrojan "https://raw.githubusercontent.com/natxanss/v2ray/main/deltrojan.sh"
 wget -O /usr/bin/exptrojan "https://raw.githubusercontent.com/natxanss/v2ray/main/exptrojan.sh"
 wget -O /usr/bin/listtrojan "https://raw.githubusercontent.com/natxanss/v2ray/main/listtrojan.sh"
+wget -O /usr/bin/listssr "https://raw.githubusercontent.com/natxanss/v2ray/main/listssr.sh"
 
 rm /etc/datadiri.conf
 curl ipinfo.io >> /etc/datadiri.conf
@@ -305,6 +306,7 @@ chmod +x /usr/bin/addtrojan
 chmod +x /usr/bin/deltrojan
 chmod +x /usr/bin/exptrojan
 chmod +x /usr/bin/listtrojan
+chmod +x /usr/bin/listssr
 
 #Make service tls
 cat> /etc/systemd/system/v2tls.service << END
