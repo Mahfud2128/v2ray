@@ -4,6 +4,7 @@ read -p "Username : " Login
 read -p "Password : " Pass
 read -p "Exp : " masaaktif
 
+IP=`curl icanhazip.com`
 domain="$(grep -oP '(?<="Host": ")[^"]*' /etc/v2ray/config.json)"
 useradd -e `date -d "$masaaktif days" +"%Y-%m-%d"` -s /bin/false -M $Login
 exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
@@ -29,7 +30,7 @@ echo -e "SSL      : 442"
 echo -e "Squid    : 3128,8080" 
 echo -e "badvpn   : 7100,7200,7300"
 echo -e "========================="
-echo -e "OpenVPN Service
+echo -e "OpenVPN Service"
 echo -e "========================="
 echo -e "TCP 1194 : http://$IP:81/client-tcp-1194.ovpn"
 echo -e "UDP 2200 : http://$IP:81/client-udp-2200.ovpn"
