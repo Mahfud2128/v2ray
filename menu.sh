@@ -7,6 +7,7 @@ country="$(grep -oP '(?<="country": ")[^"]*' /etc/datadiri.conf)"
 loc="$(grep -oP '(?<="loc": ")[^"]*' /etc/datadiri.conf)"
 timezone="$(grep -oP '(?<="timezone": ")[^"]*' /etc/datadiri.conf)"
 clear
+neofetch
 echo -e ">>_+============= Xans Tech Premium Script ==============+_<<"
 echo -e "[-]IP/Host        : $ip"
 echo -e "[-]ISP            : $isp"
