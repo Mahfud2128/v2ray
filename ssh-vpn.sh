@@ -180,6 +180,7 @@ wget https://raw.githubusercontent.com/natxanss/v2ray/main/vpn.sh &&  chmod +x v
 apt -y install fail2ban
 
 # Instal DDOS Flate
+rm -r /usr/local/ddos
 if [ -d '/usr/local/ddos' ]; then
 	echo; echo; echo "Please un-install the previous version first"
 	exit 0
