@@ -354,7 +354,7 @@ systemctl disable v2ray && systemctl enable v2ray && systemctl restart v2ray
 systemctl disable v2tls && systemctl enable v2tls && systemctl restart v2tls
 systemctl disable trojan && systemctl enable trojan && systemctl restart trojan
 
-printf '\n#Screenfetch\nif [ -f /usr/bin/menu ]; then clear && neofetch && menu; fi' >> /root/.bashrc
+printf '\n#Screenfetch\nif [ -f /usr/bin/menu ]; then menu; fi' >> /root/.bashrc
 
 #Startup
 clear
