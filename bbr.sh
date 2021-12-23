@@ -1,17 +1,5 @@
 #!/bin/bash
 #Optimasi Speed By LostServer
-Add_To_New_Line(){
-	if [ "$(tail -n1 $1 | wc -l)" == "0"  ];then
-		echo "" >> "$1"
-	fi
-	echo "$2" >> "$1"
-}
-
-Check_And_Add_Line(){
-	if [ -z "$(cat "$1" | grep "$2")" ];then
-		Add_To_New_Line "$1" "$2"
-	fi
-}
 
 Install_BBR(){
 echo "#############################################"
